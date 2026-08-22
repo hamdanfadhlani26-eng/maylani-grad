@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #020917;
+  color: #bfdbfe;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #020917;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(37, 99, 235, 0.3);
+  color: #bfdbfe;
+}
+
+/* Grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+/* Magnetic photo effect */
+.photo-magnetic {
+  transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+/* Blue shimmer text */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #93c5fd 0%,
+    #bfdbfe 20%,
+    #ffffff 40%,
+    #bfdbfe 60%,
+    #93c5fd 80%,
+    #60a5fa 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Flower petal SVG animation */
+.petal-rotate {
+  transform-origin: center;
+  animation: petal-spin 20s linear infinite;
+}
+
+@keyframes petal-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.petal-rotate-reverse {
+  transform-origin: center;
+  animation: petal-spin-reverse 25s linear infinite;
+}
+
+@keyframes petal-spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Liquid reveal */
+.liquid-reveal {
+  clip-path: ellipse(0% 0% at 50% 50%);
+}
+
+/* Photo frame glow */
+.photo-glow {
+  box-shadow:
+    0 0 30px rgba(37, 99, 235, 0.15),
+    0 0 80px rgba(37, 99, 235, 0.08),
+    inset 0 0 30px rgba(37, 99, 235, 0.05);
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+/* Divider line */
+.navy-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.4), transparent);
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(3%, 1%); }
+  30% { transform: translate(-1%, 4%); }
+  40% { transform: translate(4%, -2%); }
+  50% { transform: translate(-3%, 2%); }
+  60% { transform: translate(2%, -4%); }
+  70% { transform: translate(-4%, 1%); }
+  80% { transform: translate(1%, 3%); }
+  90% { transform: translate(3%, -1%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Envelope 3D scene */
+.envelope-scene {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.envelope-flap {
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text {
+    animation: none;
+    -webkit-text-fill-color: #bfdbfe;
+  }
+  .petal-rotate,
+  .petal-rotate-reverse {
+    animation: none;
+  }
+  .grain-overlay {
+    animation: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
