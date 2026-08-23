@@ -13,7 +13,7 @@ interface Petal {
   swayFreq: number;
   speed: number;
   opacity: number;
-  type: number; // 0-3 petal shape variant
+  type: number;
   color: string;
 }
 
@@ -32,10 +32,10 @@ function randomPetal(id: number, canvasWidth: number): Petal {
     startY: -30 - Math.random() * 120,
     size: 6 + Math.random() * 12,
     rotation: Math.random() * 360,
-    rotationSpeed: (Math.random() - 0.5) * 3,
-    swayAmp: 30 + Math.random() * 60,
-    swayFreq: 0.3 + Math.random() * 0.6,
-    speed: 0.6 + Math.random() * 1.4,
+    rotationSpeed: (Math.random() - 0.5) * 1.2,
+    swayAmp: 25 + Math.random() * 45,
+    swayFreq: 0.15 + Math.random() * 0.3,
+    speed: 0.18 + Math.random() * 0.32,
     opacity: 0.3 + Math.random() * 0.5,
     type: Math.floor(Math.random() * 4),
     color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
@@ -53,15 +53,12 @@ function drawPetal(ctx: CanvasRenderingContext2D, petal: Petal, y: number) {
   ctx.beginPath();
 
   if (petal.type === 0) {
-    // teardrop / simple petal
     ctx.moveTo(0, -s);
     ctx.bezierCurveTo(s * 0.6, -s * 0.4, s * 0.6, s * 0.4, 0, s * 0.2);
     ctx.bezierCurveTo(-s * 0.6, s * 0.4, -s * 0.6, -s * 0.4, 0, -s);
   } else if (petal.type === 1) {
-    // rounded diamond
     ctx.ellipse(0, 0, s * 0.45, s * 0.9, 0, 0, Math.PI * 2);
   } else if (petal.type === 2) {
-    // small 5-point flower
     for (let i = 0; i < 5; i++) {
       const angle = (i / 5) * Math.PI * 2 - Math.PI / 2;
       const ix = Math.cos(angle) * s * 0.4;
@@ -73,7 +70,6 @@ function drawPetal(ctx: CanvasRenderingContext2D, petal: Petal, y: number) {
       ctx.quadraticCurveTo(ix, iy, Math.cos(angle + (Math.PI * 2) / 5) * s, Math.sin(angle + (Math.PI * 2) / 5) * s);
     }
   } else {
-    // leaf shape
     ctx.moveTo(0, -s);
     ctx.bezierCurveTo(s * 0.8, -s * 0.3, s * 0.5, s * 0.6, 0, s);
     ctx.bezierCurveTo(-s * 0.5, s * 0.6, -s * 0.8, -s * 0.3, 0, -s);
@@ -111,11 +107,9 @@ export default function FallingPetals() {
     resize();
     window.addEventListener("resize", resize);
 
-    // Spawn initial petals
     const PETAL_COUNT = 28;
     petalsRef.current = Array.from({ length: PETAL_COUNT }, (_, i) => {
       const p = randomPetal(i, canvas.width);
-      // Stagger initial Y so they don't all start at top
       p.startY = -Math.random() * canvas.height;
       return p;
     });
@@ -129,32 +123,20 @@ export default function FallingPetals() {
       if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Scroll speed boost — faster when scrolling
-      const scrollBoost = 1 + scrollRef.current * 0.0006;
-      timeRef.current += 0.012;
+      const scrollBoost = 1 + scrollRef.current * 0.0002;
+      timeRef.current += 0.004;
 
       petalsRef.current = petalsRef.current.map((petal) => {
         const elapsed = timeRef.current;
-        const y =
-          petal.startY +
-          elapsed * petal.speed * 60 * scrollBoost;
-        const xSway =
-          petal.x +
-          Math.sin(elapsed * petal.swayFreq + petal.id) * petal.swayAmp;
+        const y = petal.startY + elapsed * petal.speed * 60 * scrollBoost;
+        const xSway = petal.x + Math.sin(elapsed * petal.swayFreq + petal.id) * petal.swayAmp;
 
-        const rotated = {
-          ...petal,
-          rotation: petal.rotation + petal.rotationSpeed,
-        };
+        const rotated = { ...petal, rotation: petal.rotation + petal.rotationSpeed };
 
         drawPetal(ctx, { ...rotated, x: xSway }, y);
 
-        // Reset petal when it goes off screen bottom
         if (y > canvas.height + 40) {
-          return {
-            ...randomPetal(petal.id, canvas.width),
-            startY: -30,
-          };
+          return { ...randomPetal(petal.id, canvas.width), startY: -30 };
         }
         return rotated;
       });

@@ -527,7 +527,7 @@ export default function InvitationPage() {
 
               <div className="flex justify-center mt-5">
                 <motion.a
-                  href="https://maps.app.goo.gl/QsDpSHFZmpyN8MXa8"
+                  href="https://www.google.com/maps/search/?api=1&query=Departemen+Teknik+Industri+Universitas+Andalas+Padang"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 font-sans text-sm px-6 py-3 rounded-full"
