@@ -24,13 +24,13 @@ export default function InvitationPage() {
     },
     {
       label: "Hari & Tanggal",
-      value: "Sabtu, 26 Desember 2026",
+      value: "Sabtu, 13 September 2026",
       sub: null,
     },
     {
       label: "Waktu",
-      value: "13.30 WIB",
-      sub: "Harap hadir 30 menit lebih awal",
+      value: "13.30 - 16.00 WIB",
+      sub: null,
     },
     {
       label: "Tempat",
