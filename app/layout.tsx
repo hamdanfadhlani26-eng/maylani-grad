@@ -12,7 +12,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Undangan Wisuda — Maylani Syafvitri, S.T.",
   description:
-    "Dengan penuh syukur, mengundang Anda untuk hadir dalam wisuda Maylani Syafvitri, S.T. — Teknik Industri Universitas Andalas, Periode VI 2026.",
+    "Dengan penuh syukur, mengundang Anda untuk hadir dalam wisuda Maylani Syafvitri, S.T. — Teknik Industri Universitas Andalas, Periode IV 2026.",
   openGraph: {
     title: "Undangan Wisuda — Maylani Syafvitri, S.T.",
     description: "Hadir dan doakan perjalanan barunya.",

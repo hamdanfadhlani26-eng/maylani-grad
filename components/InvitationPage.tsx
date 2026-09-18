@@ -19,12 +19,12 @@ export default function InvitationPage() {
     },
     {
       label: "Periode",
-      value: "Periode VI",
+      value: "Periode IV",
       sub: "Tahun 2026",
     },
     {
       label: "Hari & Tanggal",
-      value: "Sabtu, 13 September 2026",
+      value: "Sabtu, 19 September 2026",
       sub: null,
     },
     {
@@ -117,7 +117,7 @@ export default function InvitationPage() {
                     background: "rgba(37,99,235,0.08)",
                   }}
                 >
-                  Wisuda Periode VI · 2026
+                  Wisuda Periode IV · 2026
                 </span>
               </motion.div>
 
@@ -641,7 +641,7 @@ export default function InvitationPage() {
           </div>
 
           <p className="font-sans text-xs text-navy-700 mt-6">
-            Teknik Industri · Universitas Andalas · Periode VI 2026
+            Teknik Industri · Universitas Andalas · Periode IV 2026
           </p>
         </footer>
       </motion.main>

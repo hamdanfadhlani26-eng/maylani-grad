@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Target: Sabtu, 13 September 2026 pukul 13.30 WIB (UTC+7)
-const GRADUATION_DATE = new Date("2026-09-13T13:30:00+07:00");
+// Target: Sabtu, 19 September 2026 pukul 13.30 WIB (UTC+7)
+const GRADUATION_DATE = new Date("2026-09-19T13:30:00+07:00");
 
 function getTimeLeft() {
   const now = new Date();
@@ -144,7 +144,7 @@ export default function Countdown() {
         className="font-sans mt-4"
         style={{ fontSize: "0.65rem", color: "#2d567a", letterSpacing: "0.12em" }}
       >
-        Sabtu, 13 September 2026 · 13.30 - 16.00 WIB
+        Sabtu, 19 September 2026 · 13.30 - 16.00 WIB
       </p>
     </div>
   );
